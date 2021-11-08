@@ -50,6 +50,17 @@ const createNewTask = (text) => {
     return li;
 }
 
+const saveItem = (item)=>{
+    try {
+        // encode the item and store it the as key
+        const _key = atob(item.textContent);
+        localStorage.setItem(_key,item);
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 
+    return item;
+}
 
 //console.log(inputTextField.getAttribute('value'));
