@@ -1,6 +1,14 @@
 
 /** Task Manager */
 
+// TODO 
+
+//[*] get input text
+//[*] create new item element
+//[*] save it to local storage
+//[] load data from storage
+//[] update the UI
+
 const container = document.querySelector('.container');
 const inputTextField = document.querySelector("#inputText");
 const btnAddToList = document.querySelector("#btnAddToList");
@@ -11,7 +19,7 @@ const form = document.querySelector("#inputForm");
 /* * Set event handler for when the form is submitted - press ENTER or click the button */
 form.onsubmit = (event) => {
 
-    event.preventDefault();
+    // event.preventDefault();
 
     const text = getInputText();
     inputTextField.value = "";
@@ -25,13 +33,6 @@ form.onsubmit = (event) => {
     updateUI(data); */
 
 };
-
-// console.log("form");
-
-// get text
-// create new item element
-// save it to local storage
-// update the UI
 
 /**
  * Get the text from input field
@@ -50,6 +51,7 @@ const createNewTask = (text) => {
     return li;
 }
 
+// TODO document this fuction
 const saveItem = (item)=>{
     try {
         // encode the item and store it the as key
@@ -59,8 +61,7 @@ const saveItem = (item)=>{
         console.error(error);
         return null;
     }
-
+    return loadItemsFromStorage();
     return item;
 }
 
-//console.log(inputTextField.getAttribute('value'));
