@@ -39,5 +39,17 @@ form.onsubmit = (event) => {
  */
 const getInputText = () => inputTextField.value.toString();
 
+/**
+ * Create new item
+ * @param text - text string to be added to the list 
+ * @returns newly created item
+ */
+const createNewTask = (text) => {
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode(text));
+    return li;
+}
+
+
 
 //console.log(inputTextField.getAttribute('value'));
