@@ -16,6 +16,9 @@ const list = document.querySelector("#taskList")
 
 const form = document.querySelector("#inputForm");
 
+let tasks = [];
+const separator = '-';
+
 /* * Set event handler for when the form is submitted - press ENTER or click the button */
 form.onsubmit = (event) => {
 
@@ -24,9 +27,18 @@ form.onsubmit = (event) => {
     const text = getInputText();
     inputTextField.value = "";
     if (text.trim().length > 0) {
+        const item = createNewTask(text.trim(separator));
+
+        // Pass index and task, so that we have the keys to retrieve item from storage
+        let wasSaved = saveItem(tasks.length+separator+item.childNodes[0].textContent);
         
-        const item = createNewTask(text.trim());
-        console.log("Item was " + item?.childNodes[0].textContent);
+        if(!wasSaved){
+            console.error("Your item was not saved to local storage.");
+            return;
+        }
+        // console.log("Item " + data);
+        tasks = loadItems();
+
     }
     /*
     let data = saveItem(item);
@@ -51,17 +63,35 @@ const createNewTask = (text) => {
     return li;
 }
 
-// TODO document this fuction
+/**
+ * 
+ * @param {String} item - the text to be added to local storage, format <index-text> 
+ * @returns the item added to storage
+ */
 const saveItem = (item)=>{
+    let [key,...value] = item.split(separator);
+
     try {
-        // encode the item and store it the as key
-        const _key = atob(item.textContent);
-        localStorage.setItem(_key,item);
+        localStorage.setItem(key,value);
     } catch (error) {
         console.error(error);
         return null;
     }
-    return loadItemsFromStorage();
-    return item;
+    return true;
+}
+
+/**
+ * Load the data from storage and fill the tasks array
+ * @returns the items stored in local storage
+ */
+const loadItems = ()=>{
+    let items = [];
+
+    for(let i = 0; i <= localStorage.length; i++ ){
+        items.push(localStorage.getItem(i.toString()));
+        console.log("key: "+i+" value: "+tasks[i]);
+    }
+
+    return items;
 }
 
