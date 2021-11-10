@@ -68,10 +68,9 @@ const createNewTask = (text) => {
 /**
  * 
  * @param {String} item - the text to be added to local storage, format "<index>-<text>" 
- * @returns the item added to storage
+ * @returns Boolean True if the item added to storage and false otherwise
  */
 const saveItem = (item)=>{
-    // TODO @fixup make sure the array index is in sequence
     let [key,...value] = item.split(separator);
 
     try {
@@ -96,6 +95,7 @@ const loadItems = ()=>{
         console.log("key: "+i+" value: "+tasks[i]);
     }
 
+    // flatten the array to remove empty items
     return items.flat();
 }
 
