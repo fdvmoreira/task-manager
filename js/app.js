@@ -47,12 +47,14 @@ form.onsubmit = (event) => {
 };
 
 /**
+ * 
  * Get the text from input field
  * @returns text: string
  */
 const getInputText = () => inputTextField.value.toString();
 
 /**
+ * 
  * Create new item
  * @param text - text string to be added to the list 
  * @returns newly created item
@@ -65,14 +67,15 @@ const createNewTask = (text) => {
 
 /**
  * 
- * @param {String} item - the text to be added to local storage, format <index-text> 
+ * @param {String} item - the text to be added to local storage, format "<index>-<text>" 
  * @returns the item added to storage
  */
 const saveItem = (item)=>{
+    // TODO @fixup make sure the array index is in sequence
     let [key,...value] = item.split(separator);
 
     try {
-        localStorage.setItem(key,value);
+        localStorage.setItem(key, value);
     } catch (error) {
         console.error(error);
         return null;
@@ -81,6 +84,7 @@ const saveItem = (item)=>{
 }
 
 /**
+ * 
  * Load the data from storage and fill the tasks array
  * @returns the items stored in local storage
  */
@@ -92,6 +96,6 @@ const loadItems = ()=>{
         console.log("key: "+i+" value: "+tasks[i]);
     }
 
-    return items;
+    return items.flat();
 }
 
