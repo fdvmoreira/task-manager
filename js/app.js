@@ -36,8 +36,12 @@ form.onsubmit = (event) => {
             console.error("Your item was not saved to local storage.");
             return;
         }
-        // console.log("Item " + data);
+        // Load items into tasks
         tasks = loadItems();
+        
+        console.log(tasks.length+" tasks found! : "+tasks);
+        // Update the UI
+
 
     }
     /*
@@ -90,9 +94,8 @@ const saveItem = (item)=>{
 const loadItems = ()=>{
     let items = [];
 
-    for(let i = 0; i <= localStorage.length; i++ ){
-        items.push(localStorage.getItem(i.toString()));
-        console.log("key: "+i+" value: "+tasks[i]);
+    for(let i = 0; i < localStorage.length; i++ ){
+        items.push(localStorage.getItem(i.toString(10)));
     }
 
     // flatten the array to remove empty items
