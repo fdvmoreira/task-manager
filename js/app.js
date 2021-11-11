@@ -6,7 +6,7 @@
 //[*] get input text
 //[*] create new item element
 //[*] save it to local storage
-//[] load data from storage
+//[*] load data from storage
 //[] update the UI
 
 const container = document.querySelector('.container');
@@ -39,8 +39,12 @@ form.onsubmit = (event) => {
         // Load items into tasks
         tasks = loadItems();
         
-        console.log(tasks.length+" tasks found! : "+tasks);
+        if(tasks.length !== 0){
+            console.log(tasks.length+" tasks found! : "+tasks);
+        }
+        
         // Update the UI
+        updateUI();
 
 
     }
@@ -100,5 +104,30 @@ const loadItems = ()=>{
 
     // flatten the array to remove empty items
     return items.flat();
+}
+
+
+
+/**
+ * Update the elements on the page
+ */
+const updateUI = ()=>{
+    
+    // TODO fix removal issues with index
+    
+    // clean the UI
+    for(let i of list.children){
+        list.removeChild(i);
+    }
+    // list.prototype.forEach = Array.prototype.forEach;
+    // list.forEach((child)=>list.removeChild(child));
+    // list.removeChild();
+
+    // add new elements
+    if(tasks.length !== 0){
+        tasks.forEach((value, index, arr)=>{
+            list.appendChild(createNewTask(value));
+        });
+    }
 }
 
