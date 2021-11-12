@@ -51,8 +51,7 @@ form.onsubmit = (event) => {
     /*
     let data = saveItem(item);
     updateUI(data); */
-
-};
+}
 
 /**
  * 
@@ -111,22 +110,22 @@ const loadItems = ()=>{
 /**
  * Update the elements on the page
  */
-const updateUI = ()=>{
+const updateUI = async ()=>{
     
     // TODO fix removal issues with index
+    // TODO Create a promise to remove item from DOM properly
     
     // clean the UI
     for(let i of list.children){
-        list.removeChild(i);
+        let rmd = list.removeChild(i);
+        console.log(`Item ${rmd.textContent} removed : `);
     }
-    // list.prototype.forEach = Array.prototype.forEach;
-    // list.forEach((child)=>list.removeChild(child));
-    // list.removeChild();
-
+    
     // add new elements
     if(tasks.length !== 0){
         tasks.forEach((value, index, arr)=>{
             list.appendChild(createNewTask(value));
+            console.log("Elements in the DOM : "+list.childElementCount);
         });
     }
 }
