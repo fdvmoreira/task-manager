@@ -7,7 +7,8 @@
 //[*] create new item element
 //[*] save it to local storage
 //[*] load data from storage
-//[] update the UI
+//[*] update the UI
+//[] Load data automatically if they are stored in the storage
 
 const container = document.querySelector('.container');
 const inputTextField = document.querySelector("#inputText");
@@ -106,9 +107,7 @@ const loadItems = () => {
  */
 const updateUI = () => {
 
-    /** @TODO fix removal issues with index */
-    /** @TODO Create a promise to remove item from DOM properly */
-    
+    cleanupUI();
     console.log(`List has ${list.childElementCount} items.`);
     // add new elements
     if (tasks.length !== 0) {
