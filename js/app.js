@@ -17,7 +17,7 @@ const list = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
 
 let tasks = [];
-const separator = '-';
+const SEPARATOR = '-';
 
 /* * Set event handler for when the form is submitted - press ENTER or click the button */
 form.onsubmit = (event) => {
@@ -27,30 +27,25 @@ form.onsubmit = (event) => {
     const text = getInputText();
     inputTextField.value = "";
     if (text.trim().length > 0) {
-        const item = createNewTask(text.trim(separator));
+        const item = createNewTask(text.trim(SEPARATOR));
 
         // Pass index and task, so that we have the keys to retrieve item from storage
-        let wasSaved = saveItem(tasks.length+separator+item.childNodes[0].textContent);
-        
-        if(!wasSaved){
+        let wasSaved = saveItem(tasks.length + SEPARATOR + item.childNodes[0].textContent);
+
+        if (!wasSaved) {
             console.error("Your item was not saved to local storage.");
             return;
         }
-        // Load items into tasks
+        // Load items into tasks array
         tasks = loadItems();
-        
-        if(tasks.length !== 0){
-            console.log(tasks.length+" tasks found! : "+tasks);
+
+        if (tasks.length !== 0) {
+            console.log(tasks.length + " tasks found! : " + tasks);
         }
-        
+
         // Update the UI
         updateUI();
-
-
     }
-    /*
-    let data = saveItem(item);
-    updateUI(data); */
 }
 
 /**
@@ -74,11 +69,11 @@ const createNewTask = (text) => {
 
 /**
  * 
- * @param {String} item - the text to be added to local storage, format "<index>-<text>" 
+ * @param {String} item - the text to be added to local storage, format "[index]-[text]" 
  * @returns Boolean True if the item added to storage and false otherwise
  */
-const saveItem = (item)=>{
-    let [key,...value] = item.split(separator);
+const saveItem = (item) => {
+    let [key, ...value] = item.split(SEPARATOR);
 
     try {
         localStorage.setItem(key, value);
@@ -94,10 +89,10 @@ const saveItem = (item)=>{
  * Load the data from storage and fill the tasks array
  * @returns the items stored in local storage
  */
-const loadItems = ()=>{
+const loadItems = () => {
     let items = [];
 
-    for(let i = 0; i < localStorage.length; i++ ){
+    for (let i = 0; i < localStorage.length; i++) {
         items.push(localStorage.getItem(i.toString(10)));
     }
 
@@ -106,27 +101,33 @@ const loadItems = ()=>{
 }
 
 
-
 /**
  * Update the elements on the page
  */
-const updateUI = async ()=>{
+const updateUI = () => {
+
+    /** @TODO fix removal issues with index */
+    /** @TODO Create a promise to remove item from DOM properly */
     
-    // TODO fix removal issues with index
-    // TODO Create a promise to remove item from DOM properly
-    
-    // clean the UI
-    for(let i of list.children){
-        let rmd = list.removeChild(i);
-        console.log(`Item ${rmd.textContent} removed : `);
-    }
-    
+    console.log(`List has ${list.childElementCount} items.`);
     // add new elements
-    if(tasks.length !== 0){
-        tasks.forEach((value, index, arr)=>{
+    if (tasks.length !== 0) {
+        tasks.forEach((value) => {
             list.appendChild(createNewTask(value));
-            console.log("Elements in the DOM : "+list.childElementCount);
+            console.log("Elements in the DOM : " + list.childElementCount);
         });
-    }
+    } 
 }
 
+/**
+ * Clean the UI 
+ * The timer help slowing down the DOM because it was slow -
+ * cleaning the old elements before adding new ones
+ */
+const cleanupUI = ()=>{
+    for(const el of list.children){
+        setTimeout(()=>{
+            const removedEl = list.removeChild(el);
+        },100);
+    }
+} 
