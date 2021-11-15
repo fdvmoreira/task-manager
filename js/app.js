@@ -1,4 +1,3 @@
-
 /** Task Manager */
 
 // TODO 
@@ -19,6 +18,14 @@ const form = document.querySelector("#inputForm");
 
 let tasks = [];
 const SEPARATOR = '-';
+
+/** Load the data */
+window.onload = (env) => {
+    if (localStorage.length > 0) {
+        tasks = loadItems();
+        updateUI();
+    }
+}
 
 /* * Set event handler for when the form is submitted - press ENTER or click the button */
 form.onsubmit = (event) => {
