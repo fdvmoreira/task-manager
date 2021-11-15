@@ -7,3 +7,61 @@ html{
     padding: 0px;
     box-sizing: inherit;
 }
+
+:root{
+    --bg: rgb(36, 38, 38);
+    background-color: var(--bg);
+    font-size: 16px;
+}
+
+.container {
+    width: 320px;
+    position: relative;
+    margin: auto;
+    top: 30px;
+    height: 80vh;
+    
+}
+
+#inputForm > input, input:focus{
+    margin: auto;
+    padding: 5px;
+    border: none;
+    font-size: inherit;
+    line-height: 1.5em;
+    height: 30px;
+    align-content: center;
+}
+
+input[type="text"]{
+    width: 85%;
+    color:darkgray;
+    border-radius: 7px 0px 0px 7px;
+    padding: 5px;
+    font-weight: lighter;
+}
+
+input[type="submit"]{
+    width: 15%;
+    position: relative;
+    text-align: justify;
+    top: 2px;
+    width: 40px;
+    color: rgb(124, 122, 122);
+    border-radius: 0px 7px 7px 0px;
+    font-weight: bold;
+}
+
+ul{
+    position: relative;
+    list-style: none;
+    color: #c0c0c0;
+    left: 5px;
+}
+
+li{
+    line-height: 1.5em;
+    font-weight: lighter;
+}
+
+/** TODO Customize the button */
