@@ -8,13 +8,13 @@
 //[*] save it to local storage
 //[*] load data from storage
 //[*] update the UI
-//[] Load data automatically if they are stored in the storage
+//[] @fixup -  Load data automatically if they are stored in the storage
+//[] Implement clickable task item
+//[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
+//[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
 
-const container = document.querySelector('.container');
 const inputTextField = document.querySelector("#inputText");
-const btnAddToList = document.querySelector("#btnAddToList");
 const list = document.querySelector("#taskList")
-
 const form = document.querySelector("#inputForm");
 
 let tasks = [];
