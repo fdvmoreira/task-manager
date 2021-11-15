@@ -115,7 +115,7 @@ const updateUI = () => {
             list.appendChild(createNewTask(value));
             console.log("Elements in the DOM : " + list.childElementCount);
         });
-    } 
+    }
 }
 
 /**
@@ -123,10 +123,10 @@ const updateUI = () => {
  * The timer help slowing down the DOM because it was slow -
  * cleaning the old elements before adding new ones
  */
-const cleanupUI = ()=>{
-    for(const el of list.children){
-        setTimeout(()=>{
+const cleanupUI = () => {
+    for (const el of list.children) {
+        setTimeout(() => {
             const removedEl = list.removeChild(el);
-        },100);
+        }, 100);
     }
-} 
+}

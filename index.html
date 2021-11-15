@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +8,23 @@
     <title>Task Manager</title>
 
     <!-- Scripts -->
-    <script src="js/app.js" defer ></script>
-    
+    <script src="js/app.js" defer></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
-    <div class="container"></div>
-    <form action="#" id="inputForm">
-        <input type="text" placeholder="New Task" id="inputText" value="test">
-        <input type="submit" value="Add" id="btnAddToList">
-    </form>
-    <ul id="taskList">
-        <!-- tasks placeholder -->
-    </ul>
+    <div class="container">
+        <form action="#" id="inputForm">
+            <input type="text" placeholder="New task" id="inputText" required>
+            <input type="submit" value="add">
+        </form>
+        <ul id="taskList">
+            <!-- tasks placeholder -->
+        </ul>
+    </div>
 </body>
+
 </html>
