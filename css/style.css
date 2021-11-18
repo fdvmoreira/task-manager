@@ -1,3 +1,25 @@
+@media only screen and (max-width: 768px){
+  /**
+  * TODO
+  * [] Redesign the UI 
+  * [] Implement Resposive Desgin
+  * [] @fixup - rearange the UI for small screens
+  * 
+  */
+  body{
+    width: 100vw;
+    height: 100vh;
+    padding: auto;
+    /* background-color: red; */
+  }
+  .container{
+    width: 100vw;
+    margin: auto;
+    top: 10px;
+    height: 100vh;
+  }
+}
+
 html {
   box-sizing: border-box;
 }
@@ -24,8 +46,7 @@ html {
   height: 80vh;
 }
 
-#inputForm > input,
-input:focus {
+#inputForm > input{
   margin: auto;
   padding: 5px;
   border: none;
