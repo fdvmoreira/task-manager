@@ -7,7 +7,7 @@
 //[*] save it to local storage
 //[*] load data from storage
 //[*] update the UI
-//[] @fixup -  Load data automatically if they are stored in the storage
+//[*] @fixup -  Load data automatically if they are stored in the storage
 //[] Implement clickable task item
 //[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
@@ -46,10 +46,6 @@ form.onsubmit = (event) => {
         }
         // Load items into tasks array
         tasks = loadItems();
-
-        if (tasks.length !== 0) {
-            console.log(tasks.length + " tasks found! : " + tasks);
-        }
 
         // Update the UI
         updateUI();
@@ -115,12 +111,10 @@ const loadItems = () => {
 const updateUI = () => {
 
     cleanupUI();
-    console.log(`List has ${list.childElementCount} items.`);
     // add new elements
     if (tasks.length !== 0) {
         tasks.forEach((value) => {
             list.appendChild(createNewTask(value));
-            console.log("Elements in the DOM : " + list.childElementCount);
         });
     }
 }
@@ -136,4 +130,28 @@ const cleanupUI = () => {
             const removedEl = list.removeChild(el);
         }, 100);
     }
+}
+
+/**
+ * Implement cleanup function with Promise to ensure that the items are renoved before adding new ones
+ * @param {Array} items 
+ * @returns Promise
+ */
+const cleanupUI = (items) => {
+    const itemCount = items.length;
+    return Promise((resolve, reject)=>{
+        if(itemCount > 0){
+            let removedElementsCount = 0;
+            for (const element of items.children) {
+                const removedEl = items.removeChild(element);
+                if(emovedEl !== null && removedEl !== undefined){
+                    removedElementsCount +=1;
+                }
+            }
+            if(removedElementsCount !== itemCount){
+                reject("Not every elements were removed")
+            }
+            resolve("All elements removed");
+        }
+    })
 }
