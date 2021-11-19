@@ -8,13 +8,13 @@
 //[*] load data from storage
 //[*] update the UI
 //[*] @fixup -  Load data automatically if they are stored in the storage
-//[] @issue - Items not being displayed
+//[*] @issue - Items not being displayed
 //[] Implement clickable task item
 //[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
 
 const inputTextField = document.querySelector("#inputText");
-const list = document.querySelector("#taskList")
+const unorderedListElement = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
 
 let tasks = [];
@@ -115,7 +115,7 @@ const updateUI = () => {
         // add new elements
     if (tasks.length !== 0) {
         tasks.forEach((value) => {
-            list.appendChild(createNewTask(value));
+            unorderedListElement.appendChild(createNewTask(value));
         });
     }
     
@@ -127,9 +127,9 @@ const updateUI = () => {
  * cleaning the old elements before adding new ones
  */
  const cleanupUI = () => {
-    for (const el of list.children) {
+    for (const el of unorderedListElement.children) {
         setTimeout(() => {
-            const removedEl = list.removeChild(el);
+            const removedEl = unorderedListElement.removeChild(el);
         }, 100);
     }
 } 
