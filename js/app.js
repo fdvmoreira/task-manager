@@ -8,6 +8,7 @@
 //[*] load data from storage
 //[*] update the UI
 //[*] @fixup -  Load data automatically if they are stored in the storage
+//[] @issue - Items not being displayed
 //[] Implement clickable task item
 //[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
@@ -111,12 +112,13 @@ const loadItems = () => {
 const updateUI = () => {
 
     cleanupUI();
-    // add new elements
+        // add new elements
     if (tasks.length !== 0) {
         tasks.forEach((value) => {
             list.appendChild(createNewTask(value));
         });
     }
+    
 }
 
 /**
@@ -124,34 +126,10 @@ const updateUI = () => {
  * The timer help slowing down the DOM because it was slow -
  * cleaning the old elements before adding new ones
  */
-const cleanupUI = () => {
+ const cleanupUI = () => {
     for (const el of list.children) {
         setTimeout(() => {
             const removedEl = list.removeChild(el);
         }, 100);
     }
-}
-
-/**
- * Implement cleanup function with Promise to ensure that the items are renoved before adding new ones
- * @param {Array} items 
- * @returns Promise
- */
-const cleanupUI = (items) => {
-    const itemCount = items.length;
-    return Promise((resolve, reject)=>{
-        if(itemCount > 0){
-            let removedElementsCount = 0;
-            for (const element of items.children) {
-                const removedEl = items.removeChild(element);
-                if(emovedEl !== null && removedEl !== undefined){
-                    removedElementsCount +=1;
-                }
-            }
-            if(removedElementsCount !== itemCount){
-                reject("Not every elements were removed")
-            }
-            resolve("All elements removed");
-        }
-    })
-}
+} 
