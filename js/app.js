@@ -112,13 +112,13 @@ const loadItems = () => {
 const updateUI = () => {
 
     cleanupUI();
-        // add new elements
+    // add new elements
     if (tasks.length !== 0) {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
     }
-    
+
 }
 
 /**
@@ -126,10 +126,10 @@ const updateUI = () => {
  * The timer help slowing down the DOM because it was slow -
  * cleaning the old elements before adding new ones
  */
- const cleanupUI = () => {
-    for (const el of unorderedListElement.children) {
+const cleanupUI = () => {
+    for (const element of unorderedListElement.children) {
         setTimeout(() => {
-            const removedEl = unorderedListElement.removeChild(el);
+            const removedEl = unorderedListElement.removeChild(element);
         }, 100);
     }
-} 
+}
