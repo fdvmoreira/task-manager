@@ -13,6 +13,7 @@
 //[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
 //[] Save the state of complete tasks
+//[] delete item from the list
 //[] Move/archive completed tasks
 const inputTextField = document.querySelector("#inputText");
 const unorderedListElement = document.querySelector("#taskList")

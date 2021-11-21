@@ -99,6 +99,9 @@ li {
     cursor: pointer;
 }
 
+
+/** TODO customize delete item button style*/
+
 li:hover span::after {
     content: "x";
     position: absolute;
