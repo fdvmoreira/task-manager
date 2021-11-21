@@ -28,10 +28,10 @@ window.onload = (env) => {
     }
 }
 
+
+
 /* * Set event handler for when the form is submitted - press ENTER or click the button */
 form.onsubmit = (event) => {
-
-    // event.preventDefault();
 
     const text = getInputText();
     inputTextField.value = "";
@@ -39,14 +39,17 @@ form.onsubmit = (event) => {
         const item = createNewTask(text.trim(SEPARATOR));
 
         // Pass index and task, so that we have the keys to retrieve item from storage
-        let wasSaved = saveItem(tasks.length + SEPARATOR + item.childNodes[0].textContent);
+        let itemWasSaved = saveItem(tasks.length + SEPARATOR + item.childNodes[1].textContent);
 
-        if (!wasSaved) {
+        if (!itemWasSaved) {
             console.error("Your item was not saved to local storage.");
             return;
         }
         // Load items into tasks array
         tasks = loadItems();
+
+        // Clean up the UI
+        cleanupUI();
 
         // Update the UI
         updateUI();
@@ -68,7 +71,10 @@ const getInputText = () => inputTextField.value.toString();
  */
 const createNewTask = (text) => {
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(text));
+    const span = document.createElement("span");
+    span.setAttribute("class", "checkbox");
+    li.appendChild(span);
+    li.appendChild(document.createTextNode(" " + text));
     return li;
 }
 
@@ -111,14 +117,12 @@ const loadItems = () => {
  */
 const updateUI = () => {
 
-    cleanupUI();
     // add new elements
     if (tasks.length !== 0) {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
     }
-
 }
 
 /**
@@ -130,6 +134,6 @@ const cleanupUI = () => {
     for (const element of unorderedListElement.children) {
         setTimeout(() => {
             const removedEl = unorderedListElement.removeChild(element);
-        }, 100);
+        }, 10);
     }
 }
