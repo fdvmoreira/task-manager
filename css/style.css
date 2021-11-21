@@ -85,17 +85,34 @@ ul {
     left: 5px;
 }
 
-.checkbox::before {
+.checkbox {
     display: inline-block;
-    content: '';
     width: 10px;
     height: 10px;
     border: 1px solid rgb(23, 24, 24);
 }
 
 li {
-    line-height: 1.5em;
+    margin: 5px 0px;
+    line-height: 1.1em;
     font-weight: lighter;
+    cursor: pointer;
+}
+
+li:hover span::after {
+    content: "x";
+    position: absolute;
+    right: 0px;
+    color: gray;
+}
+
+li:hover span {
+    box-sizing: border-box;
+    content: "";
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid green;
 }
 
 

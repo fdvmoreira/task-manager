@@ -9,10 +9,11 @@
 //[*] update the UI
 //[*] @fixup -  Load data automatically if they are stored in the storage
 //[*] @issue - Items not being displayed
-//[] Implement clickable task item
+//[*] Implement clickable task item
 //[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
-
+//[] Save the state of complete tasks
+//[] Move/archive completed tasks
 const inputTextField = document.querySelector("#inputText");
 const unorderedListElement = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
@@ -53,6 +54,8 @@ form.onsubmit = (event) => {
 
         // Update the UI
         updateUI();
+
+
     }
 }
 
@@ -72,7 +75,8 @@ const getInputText = () => inputTextField.value.toString();
 const createNewTask = (text) => {
     const li = document.createElement("li");
     const span = document.createElement("span");
-    span.setAttribute("class", "checkbox");
+    // span.setAttribute("class", "checkbox");
+    span.className = "checkbox";
     li.appendChild(span);
     li.appendChild(document.createTextNode(" " + text));
     return li;
@@ -122,6 +126,7 @@ const updateUI = () => {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
+        addClickEventToItems();
     }
 }
 
@@ -136,4 +141,18 @@ const cleanupUI = () => {
             const removedEl = unorderedListElement.removeChild(element);
         }, 10);
     }
+}
+
+/**
+ * Click the item to mark it as done
+ */
+const addClickEventToItems = () => {
+    const listOfItems = document.querySelectorAll("li");
+    listOfItems.forEach(it => {
+        it.addEventListener("click", () => {
+            let bgcolor = it.childNodes[0].style.backgroundColor;
+            console.log(it.childNodes[0].childNodes);
+            it.childNodes[0].style.backgroundColor = ((bgcolor.length > 0) ? "" : "green");
+        });
+    });
 }
