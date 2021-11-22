@@ -127,7 +127,7 @@ const updateUI = () => {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
-        addClickEventToItems();
+        markItemAsComplete();
     }
 }
 
@@ -145,14 +145,13 @@ const cleanupUI = () => {
 }
 
 /**
- * Click the item to mark it as done
+ * Add click event to item to mark them as complete or not
  */
-const addClickEventToItems = () => {
+const markItemAsComplete = () => {
     const listOfItems = document.querySelectorAll("li");
     listOfItems.forEach(it => {
-        it.addEventListener("click", () => {
+        it.addEventListener("click", (target) => {
             let bgcolor = it.childNodes[0].style.backgroundColor;
-            console.log(it.childNodes[0].childNodes);
             it.childNodes[0].style.backgroundColor = ((bgcolor.length > 0) ? "" : "green");
         });
     });
