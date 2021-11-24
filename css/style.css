@@ -1,20 +1,20 @@
 @media only screen and (max-width: 768px) {
-    body {
-        width: 100vw;
-        height: 100vh;
-    }
-    .container {
-        width: 100vw;
-        margin: auto;
-        top: 10px;
-        height: 100vh;
-    }
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .container {
+    width: 100vw;
+    margin: auto;
+    top: 10px;
+    height: 100vh;
+  }
 }
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 /**
   * TODO
@@ -27,103 +27,102 @@ html {
 *,
 *:before,
 *:after {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: inherit;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: inherit;
 }
 
 :root {
-    --my-bg-dark-theme: rgb(36, 38, 38);
-    --my-bg-dark-them-text-input: rgb(20, 20, 20);
-    background-color: var(--my-bg-dark-theme);
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+  --my-bg-dark-theme: rgb(36, 38, 38);
+  --my-bg-dark-them-text-input: rgb(20, 20, 20);
+  background-color: var(--my-bg-dark-theme);
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: space-around;
-    width: 320px;
-    position: relative;
-    margin: auto;
-    height: 80vh;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: space-around;
+  width: 320px;
+  position: relative;
+  margin: auto;
+  height: 80vh;
 }
 
 #inputForm {
-    display: flex;
-    justify-content: flex-start;
-    align-content: space-around;
-    box-shadow: 1px 1px 5px var(--my-bg-dark-them-text-input);
+  display: flex;
+  justify-content: flex-start;
+  align-content: space-around;
+  box-shadow: 1px 1px 5px var(--my-bg-dark-them-text-input);
 }
 
-form>* {
-    border-style: none;
-    color: #c0c0c0;
-    text-align: start;
-    padding: 5px;
+form > * {
+  border-style: none;
+  color: #c0c0c0;
+  text-align: start;
+  padding: 5px;
 }
 
 .input-text {
-    background-color: var(--my-bg-dark-them-text-input);
-    flex-grow: 1;
+  background-color: var(--my-bg-dark-them-text-input);
+  flex-grow: 1;
 }
 
 .button {
-    background-color: var(--my-bg-dark-theme);
-    border: 1px solid var(--my-bg-dark-them-text-input);
+  background-color: var(--my-bg-dark-theme);
+  border: 1px solid var(--my-bg-dark-them-text-input);
 }
 
 .button:hover {
-    cursor: pointer;
-    background-color: var(--my-bg-dark-them-text-input);
-    border: 1px solid #c0c0c0;
-    color: whitesmoke;
+  cursor: pointer;
+  background-color: var(--my-bg-dark-them-text-input);
+  border: 1px solid #c0c0c0;
+  color: whitesmoke;
 }
 
 ul {
-    position: relative;
-    list-style: none;
-    color: #c0c0c0;
+  position: relative;
+  list-style: none;
+  color: #c0c0c0;
 }
 
 li {
-    margin: 5px 0px;
-    line-height: 1.1em;
-    font-weight: lighter;
-    cursor: pointer;
+  margin: 5px 0px;
+  line-height: 1.1em;
+  font-weight: lighter;
+  cursor: pointer;
+  text-transform: capitalize;
+  text-align: start;
+  overflow: scroll;
 }
 
 .checkbox {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: 1px solid rgb(23, 24, 24);
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgb(23, 24, 24);
 }
 
-
-/** TODO customize delete item button style*/
-
-li:hover span::after {
-    content: "delete";
-    position: absolute;
-    right: 0px;
-    color: gray;
+.delete-btn {
+  direction: rtl;
+  text-transform: lowercase;
+  visibility: hidden;
+  position: absolute;
+  right: 0px;
+  color: rgb(255, 0, 0);
 }
 
-li:hover span {
-    box-sizing: border-box;
-    cursor: pointer;
-    width: 10px;
-    height: 10px;
-    border-left: 2px solid green;
+li:hover .checkbox {
+  border-left: 2px solid green;
 }
 
-
-/** TODO Customize the button */
+li:hover .delete-btn {
+  visibility: visible;
+}

@@ -22,6 +22,9 @@ const form = document.querySelector("#inputForm");
 let tasks = [];
 const SEPARATOR = '-';
 
+const INDEX_CHECKBOX = 0;
+const INDEX_DELETE_ITEM = 2;
+
 /** Load the data */
 window.onload = (env) => {
     if (localStorage.length > 0) {
@@ -75,11 +78,15 @@ const getInputText = () => inputTextField.value.toString();
  */
 const createNewTask = (text) => {
     const li = document.createElement("li");
-    const span = document.createElement("span");
+    const checkbox = document.createElement("span");
+    checkbox.className = "checkbox";
+    const deleteBtn = document.createElement("span");
+    deleteBtn.className = "delete-btn";
+    deleteBtn.innerHTML = "delete";
     // span.setAttribute("class", "checkbox");
-    span.className = "checkbox";
-    li.appendChild(span);
+    li.appendChild(checkbox);
     li.appendChild(document.createTextNode(" " + text));
+    li.appendChild(deleteBtn);
     return li;
 }
 
@@ -127,7 +134,7 @@ const updateUI = () => {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
-        markItemAsComplete();
+        addEventListenerToListItems();
     }
 }
 
@@ -147,12 +154,30 @@ const cleanupUI = () => {
 /**
  * Add click event to item to mark them as complete or not
  */
-const markItemAsComplete = () => {
+const addEventListenerToListItems = () => {
     const listOfItems = document.querySelectorAll("li");
-    listOfItems.forEach(it => {
-        it.addEventListener("click", (target) => {
-            let bgcolor = it.childNodes[0].style.backgroundColor;
-            it.childNodes[0].style.backgroundColor = ((bgcolor.length > 0) ? "" : "green");
+    listOfItems.forEach((listItem, index) => {
+        listItem.addEventListener("click", (ev) => {
+            let bgcolor = listItem.childNodes[INDEX_CHECKBOX].style.backgroundColor;
+            markItemAsComplete(listItem.childNodes[INDEX_CHECKBOX], bgcolor);
+            listItem.insertAdjacentText("beforeend", 'Hello');
+            console.log(index);
         });
     });
+}
+
+const markItemAsComplete = (element, bgcolor) => {
+    element.style.backgroundColor = ((bgcolor.length > 0) ? "" : "green");
+    // element.nextSibling.style.textDecoration = "line-through";
+    element.nextSibling = "complete";
+    console.log(element.nextSibling);
+}
+
+const deleteItemFromList = (index) => {
+    (!(tasks.splice(index, 1)))
+    {
+        console.error("Error: Item was not removed!");
+        return;
+    }
+    console.log("Item removed from list.");
 }
