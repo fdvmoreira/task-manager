@@ -102,7 +102,7 @@ const saveItem = (item) => {
         localStorage.setItem(key, value);
     } catch (error) {
         console.error(error);
-        return null;
+        return false;
     }
     return true;
 }
@@ -134,7 +134,7 @@ const updateUI = () => {
         tasks.forEach((value) => {
             unorderedListElement.appendChild(createNewTask(value));
         });
-        addEventListenerToListItems();
+        addClickEventBehaviourToListItems();
     }
 }
 
@@ -154,30 +154,61 @@ const cleanupUI = () => {
 /**
  * Add click event to item to mark them as complete or not
  */
-const addEventListenerToListItems = () => {
-    const listOfItems = document.querySelectorAll("li");
+const addClickEventBehaviourToListItems = () => {
+    const listOfItems = document.querySelector("li");
     listOfItems.forEach((listItem, index) => {
-        listItem.addEventListener("click", (ev) => {
+        const checkbox = listItem.childNodes[0];
+        const deleteBtn = listItem.childNodes[2];
+        // mark item as complete
+        checkbox.addEventListener("click", () => {
             let bgcolor = listItem.childNodes[INDEX_CHECKBOX].style.backgroundColor;
             markItemAsComplete(listItem.childNodes[INDEX_CHECKBOX], bgcolor);
-            listItem.insertAdjacentText("beforeend", 'Hello');
-            console.log(index);
+
+        });
+        // delete item from list
+        deleteBtn.addEventListener("click", () => {
+            deleteItemFromList(index);
         });
     });
 }
 
+/**
+ * Change the appearence of the checkbox and text to simulate a complete task
+ * @param {HTMLElement} element - the element to change get the background color changed
+ * @param {String} bgcolor - the color to apply to element's background
+ */
 const markItemAsComplete = (element, bgcolor) => {
-    element.style.backgroundColor = ((bgcolor.length > 0) ? "" : "green");
-    // element.nextSibling.style.textDecoration = "line-through";
-    element.nextSibling = "complete";
-    console.log(element.nextSibling);
+    element.style.backgroundColor = ((bgcolor.length > 0) ? (() => {
+        element.parentElement.className = "";
+        return "";
+    })() : (() => {
+        element.parentElement.className = "strike-through";
+        return "green";
+    })());
+
 }
 
+/**
+ * Delete element at index from the list
+ * @param {Number} index index of the element to be removed
+ * @returns void
+ */
 const deleteItemFromList = (index) => {
-    (!(tasks.splice(index, 1)))
-    {
+    const deleteItem = tasks.splice(index, 1);
+    if (deleteItem.length === 0) {
         console.error("Error: Item was not removed!");
         return;
     }
     console.log("Item removed from list.");
+    // flatten array
+    tasks = tasks.flat();
+    localStorage.clear();
+    tasks.forEach((task, id) => {
+        localStorage.setItem(id.toString(), task);
+    });
+    cleanupUI();
+    updateUI();
+
+    // update storage
+    // update ui
 }

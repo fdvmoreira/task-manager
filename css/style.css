@@ -100,7 +100,7 @@ li {
   cursor: pointer;
   text-transform: capitalize;
   text-align: start;
-  overflow: scroll;
+  overflow: ellipse;
 }
 
 .checkbox {
@@ -125,4 +125,8 @@ li:hover .checkbox {
 
 li:hover .delete-btn {
   visibility: visible;
+}
+
+.strike-through {
+  text-decoration: line-through;
 }
