@@ -10,11 +10,14 @@
 //[*] @fixup -  Load data automatically if they are stored in the storage
 //[*] @issue - Items not being displayed
 //[*] Implement clickable task item
-//[] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
+//[*] delete item from the list
+//[*] @fixup - When reloading the page if items are saved the first added will replace the intem at index 0
 //[] @fix - remove the setTimeOut function and find another implementation (Promise) to complete a task before moving the next one
 //[] Save the state of complete tasks
-//[] delete item from the list
 //[] Move/archive completed tasks
+//[] implement removal and completion notification
+
+
 const inputTextField = document.querySelector("#inputText");
 const unorderedListElement = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
@@ -155,7 +158,7 @@ const cleanupUI = () => {
  * Add click event to item to mark them as complete or not
  */
 const addClickEventBehaviourToListItems = () => {
-    const listOfItems = document.querySelector("li");
+    let listOfItems = document.querySelectorAll("li");
     listOfItems.forEach((listItem, index) => {
         const checkbox = listItem.childNodes[0];
         const deleteBtn = listItem.childNodes[2];
@@ -167,7 +170,9 @@ const addClickEventBehaviourToListItems = () => {
         });
         // delete item from list
         deleteBtn.addEventListener("click", () => {
-            deleteItemFromList(index);
+            let elIndex = Array.from(deleteBtn.parentElement.parentElement.children).indexOf(deleteBtn.parentElement);
+            console.log("li index " + elIndex);
+            deleteItemFromList(elIndex);
         });
     });
 }
@@ -196,11 +201,10 @@ const markItemAsComplete = (element, bgcolor) => {
 const deleteItemFromList = (index) => {
     const deleteItem = tasks.splice(index, 1);
     if (deleteItem.length === 0) {
-        console.error("Error: Item was not removed!");
+        console.error("index:" + index + " Error: Item was not removed!");
         return;
     }
-    console.log("Item removed from list.");
-    // flatten array
+    console.log("index:" + index + " Item removed from list.");
     tasks = tasks.flat();
     localStorage.clear();
     tasks.forEach((task, id) => {
@@ -208,7 +212,4 @@ const deleteItemFromList = (index) => {
     });
     cleanupUI();
     updateUI();
-
-    // update storage
-    // update ui
 }
