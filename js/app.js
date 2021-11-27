@@ -18,6 +18,8 @@
 //[] implement removal and completion notification
 
 
+import Item from "./item.js";
+
 const inputTextField = document.querySelector("#inputText");
 const unorderedListElement = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
@@ -160,8 +162,8 @@ const cleanupUI = () => {
 const addClickEventBehaviourToListItems = () => {
     let listOfItems = document.querySelectorAll("li");
     listOfItems.forEach((listItem, index) => {
-        const checkbox = listItem.childNodes[0];
-        const deleteBtn = listItem.childNodes[2];
+        const checkbox = listItem.childNodes[INDEX_CHECKBOX];
+        const deleteBtn = listItem.childNodes[INDEX_DELETE_ITEM];
         // mark item as complete
         checkbox.addEventListener("click", () => {
             let bgcolor = listItem.childNodes[INDEX_CHECKBOX].style.backgroundColor;
