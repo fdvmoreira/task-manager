@@ -1,4 +1,4 @@
-/** Task Manager */
+/** JS Task Manager */
 
 // TODO 
 
@@ -24,7 +24,6 @@ const unorderedListElement = document.querySelector("#taskList")
 const form = document.querySelector("#inputForm");
 
 let tasks = [];
-const SEPARATOR = '-';
 
 const INDEX_CHECKBOX = 0;
 const INDEX_DELETE_ITEM = 2;
@@ -44,8 +43,7 @@ form.onsubmit = () => {
     const text = getInputText();
     inputTextField.value = "";
     if (text.trim().length > 0) {
-        const item = createNewTask(text.trim(SEPARATOR));
-
+        const item = createNewTask(text.trim(''));
         const task = new Item(tasks.length, item.childNodes[1].textContent, false)
         // Pass index and task, so that we have the keys to retrieve item from storage
         let itemWasSaved = saveItem(task);
@@ -56,10 +54,8 @@ form.onsubmit = () => {
         }
         // Load items into tasks array
         tasks = loadItems();
-
         // Clean up the UI
         cleanupUI();
-
         // Update the UI
         updateUI();
     }
@@ -84,7 +80,7 @@ const createNewTask = (text) => {
     deleteBtn.className = "delete-btn";
     deleteBtn.innerHTML = "delete";
     li.appendChild(checkbox);
-    li.appendChild(document.createTextNode("" + text));
+    li.appendChild(document.createTextNode("  " + text));
     li.appendChild(deleteBtn);
     return li;
 }
@@ -120,7 +116,6 @@ const loadItems = () => {
         items[index] = JSON.stringify(newItem);
         console.log("Loading ... " + items[index]); // Remove me
     });
-
     return items;
 }
 
@@ -211,8 +206,8 @@ const updateItemStatus = (index, done) => {
     console.log("index: " + index + " task " + tasks[index]);
     let newItem = JSON.parse(tasks[index]);
     newItem._checked = done;
-    tasks[index] = JSON.stringify(newItem); // update array
-    saveItem(new Item(index, newItem._item, newItem._checked)); //update localstorage
+    tasks[index] = JSON.stringify(newItem);
+    saveItem(new Item(index, newItem._item, newItem._checked));
 }
 
 /**
