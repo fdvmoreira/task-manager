@@ -1,1 +1,9 @@
+# vscode settings
 .vscode/
+
+# Jest coverage output files
+coverage/
+
+#node modules
+node_modules/
+
