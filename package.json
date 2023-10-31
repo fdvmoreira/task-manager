@@ -1,0 +1,29 @@
+{
+  "name": "task-manager",
+  "version": "0.0.1-alpha.1",
+  "description": "Task Manager",
+  "main": "js/app.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --coverage --setupFilesAfterEnv './jest.setup.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fdvmoreira/task-manager.git"
+  },
+  "keywords": [
+    "javascript",
+    "projects",
+    "todoapp"
+  ],
+  "author": "Flavio Moreira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fdvmoreira/task-manager/issues"
+  },
+  "homepage": "https://github.com/fdvmoreira/task-manager#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
