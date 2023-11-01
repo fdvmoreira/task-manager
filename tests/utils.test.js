@@ -1,28 +1,28 @@
 /** @jest-environment jsdom */
 
-import {describe, test, expect} from "@jest/globals";
+import { describe, test, expect } from "@jest/globals";
 
-import {InvalidItemInstanceObjectError, createListItemElement, toggleBoolString} from "../js/app";
+import { InvalidItemInstanceObjectError, createListItemElement, toggleBoolString } from "../js/app";
 import Item from "../js/item";
 
 /**
  * @group Utils
  */
-describe("createListItemElement", ()=>{
+describe("createListItemElement", () => {
 
 	/**
 	* @test {Utils}
 	*/
-	test("shoul throw an InvalidItemInstanceObjectError exception",()=>{
+	test("shoul throw an InvalidItemInstanceObjectError exception", () => {
 		/** @type {Item} */
-		const item = new Item(9, "hello",null);
-		expect(()=>createListItemElement(item)).toThrowError(InvalidItemInstanceObjectError);
+		const item = new Item(9, "hello", null);
+		expect(() => createListItemElement(item)).toThrowError(InvalidItemInstanceObjectError);
 	});
 
 	/**
 	* @test {Utils}
 	*/
-	test("should create an li element", ()=>{
+	test("should create an li element", () => {
 		/** @type {Item} */
 		const item = new Item(999, "New Item", false);
 		/** @type {?HTMLLIElement} */
@@ -35,24 +35,24 @@ describe("createListItemElement", ()=>{
 
 /**
 	* @group Utils
-	*/ 
-describe("toggleBooleanString", ()=>{
+	*/
+describe("toggleBooleanString", () => {
 	/**
 		* @test {Utils}
-		*/ 
-	test("should return true", ()=>{
+		*/
+	test("should return true", () => {
 		expect(toggleBoolString("false")).toEqual("true");
 	});
-		/**
-		* @test {Utils}
-		*/
-	test("should return false", ()=>{
+	/**
+	* @test {Utils}
+	*/
+	test("should return false", () => {
 		expect(toggleBoolString("true")).toEqual("false");
 	});
-		/**
-		* @test {Utils}
-		*/
-	test("should return false", ()=>{
+	/**
+	* @test {Utils}
+	*/
+	test("should return false", () => {
 		expect(toggleBoolString("")).toEqual("false");
 	});
 
