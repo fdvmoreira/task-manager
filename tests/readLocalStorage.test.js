@@ -18,7 +18,7 @@ import Item from "../js/item";
 describe("loadItems", ()=>{
 	// setup
 	beforeEach(()=>{
-		storage.setItem("0",JSON.stringify({id:0,item:"test item",checked:false}));
+		storage.setItem("0",JSON.stringify({_id:0,_item:"test item",_checked:false}));
 	});
 	// clear
 	afterEach(()=>{
