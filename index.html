@@ -1,29 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
 
     <!-- Scripts -->
     <script src="js/app.js" type="module" defer></script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
     <div class="container">
-        <form action="#" id="inputForm">
-            <input class="input-text" type="text" placeholder="New task" id="inputText" required>
-            <input class="button" type="submit" value="save">
-        </form>
-        <ul id="taskList">
-            <!-- tasks placeholder -->
-        </ul>
+        <!-- input form -->
+        <section>
+            <form class="form" data-id="input-form">
+                <input class="input-field form-control" type="text" placeholder="New task" data-id="input-text"
+                    required />
+                <input class="btn" type="submit" value="" />
+            </form>
+        </section>
+
+        <!-- tasks placeholder -->
+        <section>
+            <ul data-id="task-list"></ul>
+        </section>
+
+        <!-- tabs -->
+        <section>
+            <nav class="tabs">
+                <ul class="tab">
+                    <li class="tab-item selected"><a href="#" data-id="show-all-btn">All</a></li>
+                    <li class="tab-item"><a href="#" data-id="show-active-btn">Active</a></li>
+                    <li class="tab-item"><a href="#" data-id="show-completed-btn">Completed</a></li>
+                </ul>
+            </nav>
+        </section>
     </div>
 </body>
 
