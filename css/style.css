@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 @font-face {
@@ -37,6 +36,19 @@ body {
   margin: var(--default-margin);
   padding: var(--default-padding);
   color: #555;
+}
+
+footer {
+  background: var(--surface-color);
+  border-top: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+footer span a:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 ul {
